@@ -1,0 +1,113 @@
+
+
+* {
+  margin:0;
+  padding:0;
+}
+
+body {
+  margin: 0 auto;
+  color:#f0f0f0;
+  background:#3f51b5;
+  font-family:'Open Sans',sans-serif;
+}
+input{
+  background-color: blue;
+}
+caption {
+  font-size: 1.6em;
+  font-weight: 400;
+  padding: 10px 0;
+}
+
+.CajaUno {
+
+  max-width: 50%;
+  width:300px;
+  margin:0 auto;
+  margin-top:8px;
+  margin-bottom:40%; 
+   transition:opacity 1s;
+  -webkit-transition:opacity 1s;
+
+}
+.BoxRight{
+    position: absolute;
+    top: 8px;
+    right: 0px;
+    font-size: 18px;
+}
+.CajaEnunciadoDerecha {
+  float :left;
+  max-width: 40%;
+  border: dashed;
+ position:absolute;
+background: royalblue;
+top: 0px;
+width: 400px;
+margin: 0;
+padding: 10px;
+/* margin-top: 8px; */
+margin-bottom: 2%;
+transition: opacity 1s;
+-webkit-transition: opacity 1s;
+border-radius: 15px;
+-webkit-border-radius: 15px;
+}
+.CajaEnunciado {
+  max-width: 30%;
+  border: dashed;
+ position: fixed;
+background: royalblue;
+top: 0px;
+width: 400px;
+margin: 0;
+padding: 10px;
+/* margin-top: 8px; */
+margin-bottom: 2%;
+transition: opacity 1s;
+-webkit-transition: opacity 1s;
+border-radius: 15px;
+-webkit-border-radius: 15px;
+}
+
+
+#FormIngreso {
+  background-color: blue;
+  padding:6% 4%;
+}
+
+input[type="text"]{
+  width:92%;
+  background:#fff;
+  margin-bottom:4%;
+  border:1px solid #ccc;
+  padding:4%;
+  font-family:'Open Sans',sans-serif;
+  font-size:95%;
+  color:#555;
+}
+.MiBotonUTN {
+  display:block;
+  text-transform: capitalize;
+  border:hidden;
+  width:100%;
+  background-color: orange;
+  margin:0 auto;
+  margin-top:1%;
+  padding:10px;
+  text-align:center;
+  text-decoration:none;
+  color:#fff;
+  cursor:pointer;
+  -moz-border-radius:7px;
+  -webkit-border-radius:7px;
+  border-radius:7px;
+  transition:background .3s;
+  -webkit-transition:background .3s;
+}
+
+.MiBotonUTN:hover{
+  background:#1BA045;
+}
+

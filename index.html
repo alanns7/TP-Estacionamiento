@@ -1,46 +1,48 @@
-<!DOCTYPE html>
-<html >
+
+<!doctype html>
+<html lang="en-US">
 <head>
-  <meta charset="UTF-8">
-  <title>Flat UI Login</title>
-  
-  
-  
-      <link rel="stylesheet" href="css/style.css">
-      
 
-  
-</head>
-
-<body background="./imagenes/estacionamiento.jpg">
-  <div id="wrap">
-  <div id="regbar">
-    <div id="navthing">
-      <h2><a href="#" id="loginform">Login</a> | <a href="#">Register</a></h2>
-    <div class="login">
-      <div class="arrow-up"></div>
-      <div class="formholder">
-        <div class="randompad">
-           <fieldset>
-             <label name="email">Usuario</label>
-             <input type="email" value="example@example.com" />
-             <label name="password">Password</label>
-             <input type="password" />
-             <input type="submit" value="Login" /><br><br>
-             <input type="submit" value="Test Usuario" />
-             <input type="submit" value="Test Admin" />
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+  <title> Estacionamiento </title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+ <script src="bower_components/jquery/dist/jquery.min.js"></script>
+  <script type="text/javascript" src="./js/funciones.js"></script>
+<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="css/estilo.css">
+  <link rel="stylesheet" type="text/css" href="css/animacion.css">
+   <link rel="stylesheet" type="text/css" href="css/propios.css">
+  <link rel="stylesheet" type="text/css" media="all" href="css/style2.css">
  
-           </fieldset>
-        </div>
+
+  <!--script type="text/javascript" src="js/currency-autocomplete.js"></script-->
+</head>
+  <body>
+    <div class="CajaUno animated bounceInDown">
+
+            <form id="FormIngreso">
+            <input type="text" id="txtPatente" name="patente" />
+            <br>
+            <input type="submit" class="MiBotonUTN" value="ingreso" onclick="IngresoDeDatos(0)" name="estacionar" />
+            <br/>
+            <input type="submit" class="MiBotonUTN" value="egreso" onclick="IngresoDeDatos(1)" name="estacionar" />
+             <br/>
+            <input type="file" id="imagen"class="MiBotonUTN" name="fotoAutito" onchange="ValidarFoto()" />
+          </form>
+          <div id="divImagen" style="height:350px;overflow:auto">
+          </div>
+    </div>
+         <div id="divGrilla" class="BoxRight animated bounceInDown" style="width:421px;overflow:auto;border-style:solid;height:700px">
       </div>
-    </div>
-    </div>
-  </div>
-</div>
-  <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-
-      <script src="js/index.js"></script>
-
-</body>
-<img src="./imagenes/estacionamiento.jpg" height="100%" width="100%" />
+      <div class="CajaEnunciado animated bounceInLeft">
+      <h2>autos:</h2>
+      <br>
+      <h1>Precios</h1>
+      <br>
+      <h3 align="center">Hora:$51
+        <br>
+          Minuto:$0.85
+      </h3>
+    </div>  
+  </body>
 </html>
