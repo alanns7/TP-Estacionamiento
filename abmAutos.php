@@ -29,11 +29,12 @@ $(document).ready(function(){
     <div class="CajaUno animated bounceInDown">
 
             <form id="FormIngreso">
-            <input type="text" id="txtPatente" name="patente" required/>
+            <input type="text" id="patente" name="patente" required/>
             <br>
-            <input type="submit" class="MiBotonUTN" value="ingreso" onclick="IngresoDeDatos(0)" name="estacionar" />
+            <input type="button" class="MiBotonUTN" value="ingreso" onclick="IngresoDeDatos(0)" name="estacionar" />
             <br/>
-            <input type="submit" class="MiBotonUTN" value="egreso" onclick="IngresoDeDatos(1)" name="estacionar" />
+            <input type="button" class="MiBotonUTN" value="egreso" onclick="IngresoDeDatos(1)" name="estacionar" />
+            <input readonly   type="hidden" id="idVehiculo" class="form-control" >
              <br/>
 
           </form>

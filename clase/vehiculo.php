@@ -1,57 +1,61 @@
 <?php 
 class Vehiculo{
+    public $id;
 	public $patente;
-    public $fecha;
+    public $ingreso;
 
-    function GetPatente(){
+   /* function GetPatente(){
     	return $this->patente;
     }
 
-    function GetFecha(){
-    	return $this->fecha;
+    function GetIngreso(){
+    	return $this->ingreso;
     }
-    function __construct($patente,$fecha){
+
+    function __construct($patente,$ingreso){
     	
     	$this->patente=$patente;
-    	$this->fecha=$fecha;
-    }
+    	$this->ingreso=$ingreso;
+    }*/
     function ToString(){
-    	return $this->patente."-".$this->fecha."-"."\n";
+    	return $this->patente."-".$this->ingreso."-"."\n";
     }
     
 
-public function ModificarCdParametros()
+public function ModificarVehiculoParametros()
      {
             $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
             $consulta =$objetoAccesoDato->RetornarConsulta("
                 update vehiculos 
                 set patente=:patente,
-                ingreso=:fecha,
+                ingreso=:ingreso,
                 WHERE patente=:patente");
                 $consulta->bindValue(':patente',$this->patente, PDO::PARAM_STR);
-                $consulta->bindValue(':fecha', $this->fecha, PDO::PARAM_STR);
+                $consulta->bindValue(':ingreso', $this->ingreso, PDO::PARAM_STR);
             return $consulta->execute();
      }
 
-     public function InsertarElVehiculoParametros()
+     public function InsertarVehiculoParametros()
      {
                 $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-                $consulta =$objetoAccesoDato->RetornarConsulta("INSERT into vehiculos (patente,ingreso)values(:patente,:fecha)");
+                $consulta =$objetoAccesoDato->RetornarConsulta("INSERT into vehiculos (patente,ingreso)values(:patente,:ingreso)");
                 $consulta->bindValue(':patente',$this->patente, PDO::PARAM_STR);
-                $consulta->bindValue(':fecha', $this->fecha, PDO::PARAM_STR);
+                $consulta->bindValue(':ingreso', $this->ingreso, PDO::PARAM_STR);
                 $consulta->execute();       
                 return $objetoAccesoDato->RetornarUltimoIdInsertado();
      }
 
 
-    public function GuardarVehiculo()
-     {
-
+    public function Guardar()
+     { 
         if($this->id>0)
-            {
-                $this->ModificarCdParametros();
+            { 
+                $this->ModificarVehiculoParametros();
+                return false;
             }else {
-                $this->InsertarElCdParametros();
+
+                $this->InsertarVehiculoParametros();
+                return true;
             }
 
      }

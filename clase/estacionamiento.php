@@ -15,15 +15,16 @@ class Estacionamiento{
 				return round($diff /60); 
 		} 
 
-		public static function DarFormato($fecha){
+		 static function DarFormato($fecha){
 			$formato=explode("/",$fecha);
-			return "$formato[0]-$formato[1]-$formato[2] $formato[3]:$formato[4]:$formato[5]";
+			return "$formato[0]";
+			
+			
 		}
 	   public static function MostrarGrilla(){
 	   
 	   		$hoy = getdate();
-//	   		echo " $hoy[hours]:$hoy[minutes]:$hoy[seconds]";
-
+	   		echo "$hoy[hours]:$hoy[minutes]:$hoy[seconds]";
 
 		    $grilla="<table class='table' border=1 style='background:rgb(14, 26, 112);color:#fff;>
 		        <thead style='background:rgb(14, 26, 112);color:#fff;'>
@@ -33,9 +34,9 @@ class Estacionamiento{
 
 		        <tr>
 		            <th>Patente</th>
-		            <th>Fecha Ingreso</th>
-		            <th>Importe Cobrado</th>
-		            <th>Usuario </th>
+		            <th>Hora Ingreso</th>
+		            <th>Hora Egreso</th>
+		            <th>Importe a Cobrar</th>
 		        </tr>
 		        </thead>";
 
@@ -45,17 +46,20 @@ class Estacionamiento{
 		     	
 			        foreach ($autos as $auto) { 
 			        $autoAux=array();
+
 			       // $autoAux["nombrePropiedad"]=$auto->propiedad;
 			       $autoAux["patente"]=$auto->patente;
 			       $autoAux["ingreso"]=$auto->ingreso;
-			       $fechaFormateada=estacionamiento::DarFormato($aux[1]);
-			       $diffFecha=estacionamiento::dateDiff($formato
+			       
+			       $fechaFormateada=estacionamiento::DarFormato($autoAux["ingreso"]);
+			       $diffFecha=estacionamiento::dateDiff($fechaFormateada
 			     		,date("Y-m-d H:i:s"));
 					$grilla .= "<tr>
 								<td>".$auto->patente."</td>
 								<td>".$fechaFormateada."</td>
+								<td>"."      -        "."</td>
 								<td>"."stringDiferencia"."</td>
-								<td>"."askjdhsd"."</td>
+								
 								</tr>";
 							}
 				
@@ -68,19 +72,22 @@ class Estacionamiento{
 
 		public static function TraerLosAutos(){
 			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-		    $consulta =$objetoAccesoDato->RetornarConsulta("select patente as patente, ingreso as fecha from vehiculos");
+		    $consulta =$objetoAccesoDato->RetornarConsulta("select patente, ingreso from vehiculos");
 			$consulta->execute();
-			return $consulta->fetchAll(PDO::FETCH_CLASS, "Vehiculo");
+			return $consulta->fetchAll(PDO::FETCH_CLASS, "vehiculo");
 			}
 		
 
 	    public static function ComprobarSiEstaLaPatente($patente){
 
-	    	$listaDeAutos=estacionamiento::TraerLosAutos();
+	    	$listaDeAutos[]=Estacionamiento::TraerLosAutos();
+
 	    	if(count($listaDeAutos)==0){
+
 	    		return false;
 	    	}
 	    	foreach ($listaDeAutos as $auto) {
+
 	    		if($patente == $auto[0]){    			
 	    			return true;
 	    		}

@@ -7,6 +7,7 @@ require_once "Clase/Estacionamiento.php";
 $usuario = isset($_POST['usuario']) ? $_POST['usuario'] : NULL;
 $contrasenia = isset($_POST['contra']) ? $_POST['contra'] : NULL;
 $queHago = isset($_POST['queHago']) ? $_POST['queHago'] : NULL;
+date_default_timezone_set("America/Buenos_Aires");
 
 switch($queHago)
 {
@@ -32,38 +33,55 @@ switch($queHago)
 			echo $retorno;
 			break;
 
-		case 'Agregar':
+		case 'guardarVehiculo':
 
-		$retorno["Exito"] = TRUE;
-		$retorno["Mensaje"] = "";
-		$obj = isset($_POST['mascota']) ? json_decode(json_encode($_POST['mascota'])) : NULL;
-		
-		$m = new Mascota($obj->edad,$obj->nombre,$obj->fechaNac,$obj->tipo,isset($obj->sexo),$obj->archivo);
-		
-		if(!Mascota::Guardar($m)){
-			$retorno["Exito"] = FALSE;
-			$retorno["Mensaje"] = "Lamentablemente ocurrio un error y no se pudo escribir en el archivo.";
-		}
-		else{
-			if(!Archivo::Mover("./tmp/".$obj->archivo, "./archivos/".$obj->archivo)){
-				$retorno["Exito"] = FALSE;
-				$retorno["Mensaje"] = "Lamentablemente ocurrio un error al mover el archivo del repositorio temporal al repositorio final.";
+			/*$patente = isset($_POST['patente']) ? json_decode(json_encode($_POST['patente'])) : NULL;
+			$auto=new Vehiculo($patente,date(date_default_timezone_get()));
+
+			if(Estacionamiento::ComprobarSiEstaLaPatente($patente)){
+				$retorno["Mensaje"]="La patente ya se encuentra disponible";
+				$retorno['Exito']=false;
 			}
 			else{
-				$retorno["Mensaje"] = "El archivo fue escrito correctamente. Mascota agregada CORRECTAMENTE!!!";
-			}
-		}
-	
-		echo json_encode($retorno);
-		
-		break;
 
+				if($auto->Guardar()){
+					$retorno["Mensaje"]="Guardado existosamente";
+					$retorno["Exito"]= true;
+				}
+				else{
+
+					$retorno["Mensaje"]="No se guardo, lo siento";
+					$retorno["Exito"]=!true;
+				}
+			}
+			echo json_encode($retorno);
+			# code...
+			break;*/
+			$auto = new Vehiculo();
+			$auto->id=$_POST['id'];
+			$auto->patente=$_POST['patente'];
+			$auto->ingreso= date("H:i:s", time());
+			
+			if($auto->Guardar())
+			{
+			
+			$retorno["Mensaje"]="Guardado existosamente";
+					$retorno["Exito"]= true;
+
+			}
+			else{
+
+					$retorno["Mensaje"]="No se guardo, lo siento";
+					$retorno["Exito"]=!true;
+				}
+				echo json_encode($retorno);
+				break;
 
 		case 'borrarVehiculo':
 
-			$vehiculo = new vehiculo();
+			$vehiculo = new Vehiculo();
 			$vehiculo->patente=$_POST['patente'];
-			$cantidad=$vehiculo->BorrarCd();
+			$cantidad=$vehiculo->BorrarVehiculo();
 			echo $cantidad;
 
 		break;

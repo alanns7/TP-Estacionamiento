@@ -115,7 +115,7 @@ function mostrarGrilla(){
         async: true 
     })
     .done(function (obj){
-        alert("hola");
+        
         $("#divGrilla").html(obj);
             
         
@@ -126,19 +126,21 @@ function mostrarGrilla(){
 }
 
 
-function BorrarVehiculo(idParametro)
+function BorrarVehiculo(patente)
 {
     //alert(idParametro);
         var funcionAjax=$.ajax({
         url:"./gestion.php",
-        type:"post",
+        type:'POST',
+        dataType:"json",
         data:{
             queHago:"BorrarVehiculo",
-            patente:idParametro  
+            patente:patente
         }
+        async: true
     });
     funcionAjax.done(function(retorno){
-       // Mostrar("MostrarGrilla");
+       mostrarGrilla();
         $("#informe").html("cantidad de eliminados "+ retorno); 
         
     });
@@ -147,7 +149,7 @@ function BorrarVehiculo(idParametro)
     }); 
 }
 
-function EditarVehixulo(idParametro)
+function EditarVehiculo(idParametro)
 {
     var funcionAjax=$.ajax({
         url:"./gestion.php",
@@ -172,43 +174,21 @@ function EditarVehixulo(idParametro)
     
 }
 
-function GuardarVehiculo()
-{
-        var id=$("#idVehiculo").val();
-        var patente=$("#patente").val();
-        var tiempo=$("#tiempo").val();
-
-        var funcionAjax=$.ajax({
-        url:"nexo.php",
-        type:"post",
-        data:{ 
-            queHago:"GuardarVehiculo", 
-            titulo:titulo,                                                             
-            anio:anio     
-        }
-    });
-    funcionAjax.done(function(retorno){
-            Mostrar("MostrarGrilla");
-        $("#informe").html("cantidad de agregados "+ retorno);  
-        
-    });
-    funcionAjax.fail(function(retorno){ 
-        $("#informe").html(retorno.responseText);   
-    }); 
-}
 
 function IngresoDeDatos(num){
-    var patente=$("#txtPatente").val();
-    var imagen=$("#hdnArchivoTemp").val();  
-    if(patenteOk(patente)){
+    var patente=$("#patente").val();
+    
+    /*if(patenteOk(patente)){
+
         alert("Patente nula");
         return;
-    }
+    }*/
     if(num==0){
+
         AgregarAuto(patente);
     }
     else{
-        SacarAuto();
+        BorrarVehiculo(patente);
     }
 
 }
@@ -222,9 +202,9 @@ function patenteOk(patente){
 
 function AgregarAuto(patente){
     pagina="./gestion.php";
-    queHago="Agregar";
-    var array={};
-    array["patente"]=patente;
+    queHago="guardarVehiculo";
+    var id=$("#idVehiculo").val();
+    var patente=$("#patente").val();
     
 
     $.ajax({
@@ -232,18 +212,19 @@ function AgregarAuto(patente){
         url:pagina,
         dataType:'json',
         data:{queHago:queHago,
-            array: array},
+            id: id,
+            patente:patente,
+            },
         async: true 
     })
     .done(function (obj){
         console.log(obj);
-        if(obj == "OK")
         mostrarGrilla();
-        $("#txtPatente").val("");
-        $("#divImagen").html("");
-        $("#hdnArchivoTemp").val("");
-        $("#imagen").val("");
+        $("#patente").val("");
+       
+        
     }).fail(function (jqXHR, textStatus, errorThrown){
+
          console.log(jqXHR.responseText + "\n" + textStatus + "\n" + errorThrown);
     });
 
