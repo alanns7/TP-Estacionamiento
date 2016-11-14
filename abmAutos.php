@@ -44,13 +44,14 @@ $(document).ready(function(){
          <div id="divGrilla" class="BoxRight animated bounceInDown" style="width:421px;overflow:auto;border-style:solid;height:700px">
       </div>
       <div class="CajaEnunciado animated bounceInLeft">
-      <h2>autos:</h2>
+      <h2>Autos:</h2>
       <br>
       <h1>Precios</h1>
       <br>
-      <h3 align="center">Hora:$51
+      <h3 align="center">Minuto: $1.50<br>
+        Hora: $80(minimo)
         <br>
-          Minuto:$0.85
+          Dia: $1000
       </h3>
     </div>	
 	</body>

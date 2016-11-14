@@ -3,6 +3,7 @@ class Vehiculo{
     public $id;
 	public $patente;
     public $ingreso;
+    public $egreso;
 
    /* function GetPatente(){
     	return $this->patente;

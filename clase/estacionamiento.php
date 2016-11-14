@@ -11,7 +11,6 @@ class Estacionamiento{
 				$start_ts = strtotime($start); 
 				$end_ts = strtotime($end); 
 				$diff =$end_ts-$start_ts; 
-
 				return round($diff /60); 
 		} 
 
@@ -24,7 +23,7 @@ class Estacionamiento{
 	   public static function MostrarGrilla(){
 	   
 	   		$hoy = getdate();
-	   		echo "$hoy[hours]:$hoy[minutes]:$hoy[seconds]";
+	   		echo "$hoy[hours]:$hoy[minutes] Hs.";
 
 		    $grilla="<table class='table' border=1 style='background:rgb(14, 26, 112);color:#fff;>
 		        <thead style='background:rgb(14, 26, 112);color:#fff;'>
@@ -35,7 +34,7 @@ class Estacionamiento{
 		        <tr>
 		            <th>Patente</th>
 		            <th>Hora Ingreso</th>
-		            <th>Hora Egreso</th>
+		            <th>Tiempo transcurrido (minutos)</th>
 		            <th>Importe a Cobrar</th>
 		        </tr>
 		        </thead>";
@@ -52,13 +51,13 @@ class Estacionamiento{
 			       $autoAux["ingreso"]=$auto->ingreso;
 			       
 			       $fechaFormateada=estacionamiento::DarFormato($autoAux["ingreso"]);
-			       $diffFecha=estacionamiento::dateDiff($fechaFormateada
+			       $costo=estacionamiento::dateDiff($fechaFormateada
 			     		,date("Y-m-d H:i:s"));
 					$grilla .= "<tr>
 								<td>".$auto->patente."</td>
 								<td>".$fechaFormateada."</td>
-								<td>"."      -        "."</td>
-								<td>"."stringDiferencia"."</td>
+								<td>".$costo."</td>
+								<td>".$costo*1.50."</td>
 								
 								</tr>";
 							}

@@ -35,28 +35,6 @@ switch($queHago)
 
 		case 'guardarVehiculo':
 
-			/*$patente = isset($_POST['patente']) ? json_decode(json_encode($_POST['patente'])) : NULL;
-			$auto=new Vehiculo($patente,date(date_default_timezone_get()));
-
-			if(Estacionamiento::ComprobarSiEstaLaPatente($patente)){
-				$retorno["Mensaje"]="La patente ya se encuentra disponible";
-				$retorno['Exito']=false;
-			}
-			else{
-
-				if($auto->Guardar()){
-					$retorno["Mensaje"]="Guardado existosamente";
-					$retorno["Exito"]= true;
-				}
-				else{
-
-					$retorno["Mensaje"]="No se guardo, lo siento";
-					$retorno["Exito"]=!true;
-				}
-			}
-			echo json_encode($retorno);
-			# code...
-			break;*/
 			$auto = new Vehiculo();
 			$auto->id=$_POST['id'];
 			$auto->patente=$_POST['patente'];
@@ -78,10 +56,10 @@ switch($queHago)
 				break;
 
 		case 'borrarVehiculo':
-			
+
 			$vehiculo = new Vehiculo();
 			$vehiculo->patente=$_POST['patente'];
-
+			$vehiculo->egreso=date("H:i:s", time());
 			$cantidad=$vehiculo->BorrarVehiculo();
 			echo $cantidad;
 
