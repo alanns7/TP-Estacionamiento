@@ -22,6 +22,18 @@ class Vehiculo{
     }
     
 
+    public function BorrarVehiculo()
+     {
+            $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
+            $consulta =$objetoAccesoDato->RetornarConsulta("
+                delete 
+                from vehiculos                
+                WHERE patente=:patente"); 
+                $consulta->bindValue(':patente',$this->patente, PDO::PARAM_STR);      
+                $consulta->execute();
+                return $consulta->rowCount();
+     }
+
 public function ModificarVehiculoParametros()
      {
             $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 

@@ -129,22 +129,22 @@ function mostrarGrilla(){
 function BorrarVehiculo(patente)
 {
     //alert(idParametro);
-        var funcionAjax=$.ajax({
+
+        $.ajax({
         url:"./gestion.php",
         type:'POST',
         dataType:"json",
         data:{
-            queHago:"BorrarVehiculo",
+            queHago:"borrarVehiculo",
             patente:patente
-        }
+        },
         async: true
-    });
-    funcionAjax.done(function(retorno){
-       mostrarGrilla();
+
+    }).done(function(retorno){
+       //mostrarGrilla();
         $("#informe").html("cantidad de eliminados "+ retorno); 
-        
-    });
-    funcionAjax.fail(function(retorno){ 
+        mostrarGrilla();
+    }).fail(function(retorno){ 
         $("#informe").html(retorno.responseText);   
     }); 
 }

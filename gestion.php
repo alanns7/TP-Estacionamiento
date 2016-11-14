@@ -78,9 +78,10 @@ switch($queHago)
 				break;
 
 		case 'borrarVehiculo':
-
+			
 			$vehiculo = new Vehiculo();
 			$vehiculo->patente=$_POST['patente'];
+
 			$cantidad=$vehiculo->BorrarVehiculo();
 			echo $cantidad;
 
