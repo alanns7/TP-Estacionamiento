@@ -28,7 +28,7 @@ switch($queHago)
 				
 				$_SESSION['registrado']="admin";
 				$retorno="admin";
-				include ("index.html");
+				include ("index.php");
 				
 			}else
 			{
@@ -36,7 +36,7 @@ switch($queHago)
 				
 				$_SESSION['registrado']="usuario";
 				$retorno="user";
-				include ("index.html");
+				include ("index.php");
 			}
 
 			echo $retorno;
