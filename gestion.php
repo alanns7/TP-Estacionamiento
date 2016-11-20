@@ -5,7 +5,7 @@ require_once "Clase/Vehiculo.php";
 require_once "Clase/Estacionamiento.php";
 
 $usuario = isset($_POST['usuario']) ? $_POST['usuario'] : NULL;
-$contrasenia = isset($_POST['contra']) ? $_POST['contra'] : NULL;
+$contra = isset($_POST['contra']) ? $_POST['contra'] : NULL;
 $queHago = isset($_POST['queHago']) ? $_POST['queHago'] : NULL;
 date_default_timezone_set("America/Buenos_Aires");
 $tipoUsuario=0;
@@ -14,20 +14,20 @@ switch($queHago)
 		case 'mostrarLogin':
 
 			//include("login.html");
-			$retorno;
+			$retorno="";
 
 			if($usuario=="")
 			{
 				$retorno="NO-REGISTRADO";
 			}
 
-			if(($usuario=="admin@admin.com" && $contra=="1234") || ($usuario=="octavio@octavio.com" && $contra=="5678"))
+			if(($usuario=="admin@admin.com") || ($usuario=="octavio@octavio.com"))
 			{
 				
 				setcookie("registro",$usuario,  time()+36000 , '/');
 				
 				$_SESSION['registrado']="admin";
-				$retorno="ingreso";
+				$retorno="admin";
 				include ("index.html");
 				
 			}else
@@ -35,7 +35,7 @@ switch($queHago)
 				setcookie("registro",$usuario,  time()+36000 , '/');
 				
 				$_SESSION['registrado']="usuario";
-				$retorno="ingreso";
+				$retorno="user";
 				include ("index.html");
 			}
 
@@ -76,7 +76,7 @@ switch($queHago)
 					$retorno["Exito"]=false;
 					
 				}
-				echo json_encode($retorno);
+				echo json_encode($contra);
 			
 				break;
 

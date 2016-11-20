@@ -20,14 +20,14 @@ function MostrarLogin()
     //confirm("MOSTRAR LOGIN");
     var pagina = "./gestion.php";                                                                                     
     var usuario=$('#usuario').val();
-    var contrasenia=$('#contra').val();
+    var contra=$('#contra').val();
 
     var funcionAjax=$.ajax({
         url:pagina,
         type:'POST',
         data:{
             usuario: usuario,
-            contra: contrasenia,
+            contra: contra,
             queHago:"mostrarLogin"}
     });
     funcionAjax.done(function(retorno){
@@ -35,6 +35,15 @@ function MostrarLogin()
             alert("Aun quedan campos sin completar");
             return false;
         }
+        if(retorno == "admin") {
+            alert("Se ha registrado como administrador");
+            return true;
+        }
+        if(retorno == "user") {
+            alert("Se ha registrado como usuario");
+            return true;
+        }
+
         $('#frmIngreso').submit();
     });
     funcionAjax.fail(function(retorno){
