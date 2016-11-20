@@ -17,19 +17,23 @@
   <div id="wrap">
   <div id="regbar">
     <div id="navthing">
-      <h2><a id="loginform">Login</a> | <a>Register</a></h2>
+      <h2><a id="loginform">Login</a></h2>
     <div class="login">
       <div class="arrow-up"></div>
       <div class="formholder">
         <div class="randompad">
            <fieldset>
-           
-           <form id="frmIngreso" action="abmAutos.php">
+           <?php 
+           setcookie("mailUsrAux", "NONE" , time() -8 , "/");
+            ?>
+
+           <form id="frmIngreso" action="abmAutos.php" method="POST">
              <label name="lblUsuario">Usuario</label><br>
-             <input type="email" value="example@gmail.com" name="usuario" id="usuario"/>
+             <input type="email" value="example@gmail.com" name="usuario" id="usuario" maxlen="20"/>
              <label name="password">Password</label>
              <input type="password" name="contra" id="contra"/>
              <input type="submit" value="Login" onclick="MostrarLogin();return false;"/><br><br>
+             
              <input type="submit" value="Test Usuario" name="testUsu" onclick="testUsuario();return false"/>
              <input type="submit" value="Test Admin" name="testAdm" onclick="testAdmin();return false"/>
             </form>

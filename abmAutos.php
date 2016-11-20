@@ -28,7 +28,7 @@ $(document).ready(function(){
 	<body>
     <div class="CajaUno animated bounceInDown">
 
-            <form id="FormIngreso">
+            <form id="FormIngreso" method="POST">
             <input type="text" id="patente" name="patente" required/>
             <br>
             <input type="button" class="MiBotonUTN" value="ingreso" onclick="IngresoDeDatos(0)" name="estacionar" />
@@ -49,7 +49,7 @@ $(document).ready(function(){
       <h1>Precios</h1>
       <br>
       <h3 align="center">Minuto: $1.50<br>
-        Hora: $80(minimo)
+        Hora: $80
         <br>
           Dia: $1000
       </h3>

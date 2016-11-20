@@ -4,6 +4,8 @@ class Vehiculo{
 	public $patente;
     public $ingreso;
     public $egreso;
+    public $usuario;
+    public $privilegio;
 
    /* function GetPatente(){
     	return $this->patente;
@@ -35,25 +37,15 @@ class Vehiculo{
                 return $consulta->rowCount();
      }
 
-public function ModificarVehiculoParametros()
-     {
-            $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-            $consulta =$objetoAccesoDato->RetornarConsulta("
-                update vehiculos 
-                set patente=:patente,
-                ingreso=:ingreso,
-                WHERE patente=:patente");
-                $consulta->bindValue(':patente',$this->patente, PDO::PARAM_STR);
-                $consulta->bindValue(':ingreso', $this->ingreso, PDO::PARAM_STR);
-            return $consulta->execute();
-     }
 
      public function InsertarVehiculoParametros()
-     {
+     {      
                 $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-                $consulta =$objetoAccesoDato->RetornarConsulta("INSERT into vehiculos (patente,ingreso)values(:patente,:ingreso)");
+                $consulta =$objetoAccesoDato->RetornarConsulta("INSERT into vehiculos (patente,ingreso,usuario,privilegio)values(:patente,:ingreso,:usuario,:privilegio)");
                 $consulta->bindValue(':patente',$this->patente, PDO::PARAM_STR);
                 $consulta->bindValue(':ingreso', $this->ingreso, PDO::PARAM_STR);
+                $consulta->bindValue(':usuario', $this->usuario, PDO::PARAM_STR);
+                $consulta->bindValue(':privilegio', $this->privilegio, PDO::PARAM_STR);
                 $consulta->execute();       
                 return $objetoAccesoDato->RetornarUltimoIdInsertado();
      }

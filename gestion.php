@@ -8,15 +8,15 @@ $usuario = isset($_POST['usuario']) ? $_POST['usuario'] : NULL;
 $contrasenia = isset($_POST['contra']) ? $_POST['contra'] : NULL;
 $queHago = isset($_POST['queHago']) ? $_POST['queHago'] : NULL;
 date_default_timezone_set("America/Buenos_Aires");
-
+$tipoUsuario=0;
 switch($queHago)
 {
-	case 'mostrarLogin':
+		case 'mostrarLogin':
 
 			//include("login.html");
 			$retorno;
 
-			if($usuario=="admin@admin.com" && $contra=="1234")
+			if(($usuario=="admin@admin.com" && $contra=="1234") || ($usuario=="profe@profe.com" && $contra=="5678"))
 			{
 				
 				setcookie("registro",$usuario,  time()+36000 , '/');
@@ -27,20 +27,38 @@ switch($queHago)
 				
 			}else
 			{
-				$retorno= "NO-REGISTRADO";
+				setcookie("registro",$usuario,  time()+36000 , '/');
+				
+				$_SESSION['registrado']="usuario";
+				$retorno="ingreso";
+				include ("index.html");
 			}
 
 			echo $retorno;
+			setcookie("mailUsrAux", $usuario , time() + (86400 * 30), "/");
 			break;
-
+				
+				
 		case 'guardarVehiculo':
 
 			$auto = new Vehiculo();
 			$auto->id=$_POST['id'];
 			$auto->patente=$_POST['patente'];
+			$auto->usuario=$_COOKIE["mailUsrAux"];
 			$auto->ingreso= date("H:i:s", time());
+			//$auto->usuario=$usuario;
+
 			
-			if($auto->Guardar())
+		  	if(($auto->usuario == "admin@admin.com") || ($auto->usuario =="profe@profe.com"))
+		  	{
+		  		$auto->privilegio="Administrador";
+		  	}
+		  	else
+		  	{
+		  		$auto->privilegio="Usuario";
+		  	}
+		  
+			if(($auto->patente != "") && ($auto->Guardar()))
 			{
 			
 			$retorno["Mensaje"]="Guardado existosamente";
@@ -49,26 +67,54 @@ switch($queHago)
 			}
 			else{
 
-					$retorno["Mensaje"]="No se guardo, lo siento";
-					$retorno["Exito"]=!true;
+					$retorno["Mensaje"]="No se ha podido guardar. Verifique que el campo no este vacio";
+					$retorno["Exito"]=false;
+					
 				}
 				echo json_encode($retorno);
+			
 				break;
 
+
 		case 'borrarVehiculo':
+
+			$retorno["Exito"] = TRUE;
+			$retorno["Mensaje"] = "";
 
 			$vehiculo = new Vehiculo();
 			$vehiculo->patente=$_POST['patente'];
 			$vehiculo->egreso=date("H:i:s", time());
-			$cantidad=$vehiculo->BorrarVehiculo();
-			echo $cantidad;
+			
 
-		break;
+			if($vehiculo->patente!="")
+			{
+
+			$retorno["Mensaje"] = "El auto con patente ".$vehiculo->patente." fue retirado correctamente." + "\n" + " Importe a cobrar: $".Estacionamiento::Importe($vehiculo->patente);
+			
+			}
+			else
+			{
+				$retorno["Mensaje"]="Por favor rellene el cuadro de dialogo con una patente valida";
+			}
+			$cantidad=$vehiculo->BorrarVehiculo();
+			echo json_encode($retorno);
+			
+			break;
+
 
 		case 'mostrarGrilla':
-		echo Estacionamiento::MostrarGrilla();
+			
+			if(($usuario =="admin@admin.com") || ($usuario=="profe@profe.com"))
+			{
+				echo Estacionamiento::MostrarGrilla(0);
+			}
 
-		break;
+			else
+			{
+				echo Estacionamiento::MostrarGrilla(1);
+			}
+
+			break;
 
 }
 

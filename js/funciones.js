@@ -117,7 +117,7 @@ function mostrarGrilla(){
     .done(function (obj){
         
         $("#divGrilla").html(obj);
-            
+            alert("PRIVILEGIOS");
         
     }).fail(function (jqXHR, textStatus, errorThrown){
          console.log(jqXHR.responseText + "\n" + textStatus + "\n" + errorThrown);
@@ -140,39 +140,16 @@ function BorrarVehiculo(patente)
         },
         async: true
 
-    }).done(function(retorno){
-       //mostrarGrilla();
-        $("#informe").html("cantidad de eliminados "+ retorno); 
+    }).done(function (objJson){
+       
+        alert(objJson.Mensaje);
         mostrarGrilla();
-    }).fail(function(retorno){ 
-        $("#informe").html(retorno.responseText);   
+    }).fail(function (jqXHR, textStatus, errorThrown){ 
+        console.log(jqXHR.responseText + "\n" + textStatus + "\n" + errorThrown); 
     }); 
 }
 
-function EditarVehiculo(idParametro)
-{
-    var funcionAjax=$.ajax({
-        url:"./gestion.php",
-        type:"post",
-        data:{
-            queHago:"TraerVehiculo",
-            patente:idParametro  
-        }
-    });
-    funcionAjax.done(function(retorno){
-        var cd =JSON.parse(retorno);    
-        $("#idVehiculo").val(vehiculo.id);
-        $("#patente").val(vehiculo.patente);
-        $("#tiempo").val(cd.tiempo);
-    });
-    funcionAjax.fail(function(retorno){ 
-        $("#informe").html(retorno.responseText);   
-    }); 
-    setTimeout(function() {"MostrarFormAlta"}, 5);
-    Mostrar("MostrarFormAlta");
 
-    
-}
 
 
 function IngresoDeDatos(num){
@@ -203,8 +180,9 @@ function patenteOk(patente){
 function AgregarAuto(patente){
     pagina="./gestion.php";
     queHago="guardarVehiculo";
-    var id=$("#idVehiculo").val();
-    var patente=$("#patente").val();
+    var id=$('#idVehiculo').val();
+    var patenteAux=$('#patente').val();
+    var usuarioAux=$('#usuario').val();
     
 
     $.ajax({
@@ -213,12 +191,13 @@ function AgregarAuto(patente){
         dataType:'json',
         data:{queHago:queHago,
             id: id,
-            patente:patente,
+            patente:patenteAux,
+            usuario:usuarioAux
             },
         async: true 
     })
-    .done(function (obj){
-        console.log(obj);
+    .done(function (objJson){
+        alert(objJson.Mensaje);
         mostrarGrilla();
         $("#patente").val("");
        
