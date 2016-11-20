@@ -16,7 +16,12 @@ switch($queHago)
 			//include("login.html");
 			$retorno;
 
-			if(($usuario=="admin@admin.com" && $contra=="1234") || ($usuario=="profe@profe.com" && $contra=="5678"))
+			if($usuario=="")
+			{
+				$retorno="NO-REGISTRADO";
+			}
+
+			if(($usuario=="admin@admin.com" && $contra=="1234") || ($usuario=="octavio@octavio.com" && $contra=="5678"))
 			{
 				
 				setcookie("registro",$usuario,  time()+36000 , '/');
@@ -49,7 +54,7 @@ switch($queHago)
 			//$auto->usuario=$usuario;
 
 			
-		  	if(($auto->usuario == "admin@admin.com") || ($auto->usuario =="profe@profe.com"))
+		  	if(($auto->usuario == "admin@admin.com") || ($auto->usuario =="octavio@octavio.com"))
 		  	{
 		  		$auto->privilegio="Administrador";
 		  	}
@@ -89,7 +94,7 @@ switch($queHago)
 			if($vehiculo->patente!="")
 			{
 
-			$retorno["Mensaje"] = "El auto con patente ".$vehiculo->patente." fue retirado correctamente." + "\n" + " Importe a cobrar: $".Estacionamiento::Importe($vehiculo->patente);
+				$retorno["Mensaje"]="El auto con patente ".$vehiculo->patente." fue retirado correctamente. Importe a cobrar: $".Estacionamiento::Importe($vehiculo->patente);
 			
 			}
 			else
@@ -104,7 +109,7 @@ switch($queHago)
 
 		case 'mostrarGrilla':
 			
-			if(($usuario =="admin@admin.com") || ($usuario=="profe@profe.com"))
+			if(($usuario =="admin@admin.com") || ($usuario=="octavio@octavio.com"))
 			{
 				echo Estacionamiento::MostrarGrilla(0);
 			}

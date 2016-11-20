@@ -32,7 +32,7 @@ function MostrarLogin()
     });
     funcionAjax.done(function(retorno){
         if(retorno == "NO-REGISTRADO") {
-            alert(" usted no esta registrado");
+            alert("Aun quedan campos sin completar");
             return false;
         }
         $('#frmIngreso').submit();
@@ -117,8 +117,7 @@ function mostrarGrilla(){
     .done(function (obj){
         
         $("#divGrilla").html(obj);
-            alert("PRIVILEGIOS");
-        
+
     }).fail(function (jqXHR, textStatus, errorThrown){
          console.log(jqXHR.responseText + "\n" + textStatus + "\n" + errorThrown);
     });
