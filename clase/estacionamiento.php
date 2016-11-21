@@ -11,6 +11,10 @@ class Estacionamiento{
 				$start_ts = strtotime($start); 
 				$end_ts = strtotime($end); 
 				$diff =$end_ts-$start_ts; 
+				if($diff<0)
+				{
+					$diff=$diff*(-1);
+				}
 				return round($diff /60); 
 		} 
 
@@ -90,7 +94,7 @@ class Estacionamiento{
 			       $autoAux["privilegio"]=$auto->privilegio;
 			      
 			       $fechaFormateada=estacionamiento::DarFormato($autoAux["ingreso"]);
-			       $tiempo=estacionamiento::dateDiff($fechaFormateada
+			       $tiempo=estacionamiento::dateDiff($autoAux["ingreso"]
 			     		,date("Y-m-d H:i:s"));
 					$grilla .= "<tr>
 								<td>".$auto->patente."</td>

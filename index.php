@@ -44,6 +44,11 @@
     </div>
   </div>
 </div>
+<div>
+Admin: admin@admin.com - Contra: 1234<br>
+Admin: octavio@octavio.com - Contra: 5678 
+
+</div>
   <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
 
       <script src="js/index.js"></script>

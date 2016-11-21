@@ -205,7 +205,7 @@ function AgregarAuto(patente){
         async: true 
     })
     .done(function (objJson){
-        alert(objJson.Mensaje);
+       // alert(objJson.Mensaje);
         mostrarGrilla();
         $("#patente").val("");
        
