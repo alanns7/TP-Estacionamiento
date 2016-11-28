@@ -31,17 +31,16 @@ function MostrarLogin()
             queHago:"mostrarLogin"}
     });
     funcionAjax.done(function(retorno){
+       
         if(retorno == "NO-REGISTRADO") {
             alert("Aun quedan campos sin completar");
             return false;
-        }
-        if(retorno == "admin") {
-            alert("Se ha registrado como administrador");
-            return true;
-        }
-        if(retorno == "user") {
-            alert("Se ha registrado como usuario");
-            return true;
+        }else if(usuario == "admin@admin.com" ){
+                alert("Usted se ha registrado como admin");
+
+        }else {
+            alert("Usted se ha registrado como usuario");
+
         }
 
         $('#frmIngreso').submit();
@@ -115,12 +114,12 @@ function deslogear()
 }*/
 
 function mostrarGrilla(){
-    
     $.ajax({
         type:'POST',
         url:pagina,
         dataType:'html',
-        data:{queHago:"mostrarGrilla"},
+        data:{queHago:"mostrarGrilla",
+        },
         async: true 
     })
     .done(function (obj){

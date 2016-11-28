@@ -19,6 +19,8 @@ switch($queHago)
 			if($usuario=="")
 			{
 				$retorno="NO-REGISTRADO";
+				echo $retorno;
+				return;
 			}
 
 			if(($usuario=="admin@admin.com") || ($usuario=="octavio@octavio.com"))
@@ -28,6 +30,7 @@ switch($queHago)
 				
 				$_SESSION['registrado']="admin";
 				$retorno="admin";
+				echo $retorno;
 				include ("index.php");
 				
 			}else
@@ -109,7 +112,9 @@ switch($queHago)
 
 		case 'mostrarGrilla':
 			
-			if(($usuario =="admin@admin.com") || ($usuario=="octavio@octavio.com"))
+			$elUsuario = isset($_COOKIE["mailUsrAux"]) ? $_COOKIE["mailUsrAux"] : NULL;
+			
+			if(($elUsuario =="admin@admin.com") || ($elUsuario=="octavio@octavio.com"))
 			{
 				echo Estacionamiento::MostrarGrilla(0);
 			}
